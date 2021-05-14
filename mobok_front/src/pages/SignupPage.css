@@ -1,0 +1,12 @@
+#SignupPage{
+    position:relative;
+    display:grid;
+    justify-content: center;
+}
+
+#formContent{
+    border:2px solid black;
+    border-radius: 10px;
+    margin-top: 200px;
+    padding:30px;
+}
