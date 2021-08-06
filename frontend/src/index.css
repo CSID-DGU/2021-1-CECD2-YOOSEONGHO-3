@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
+
+@layer utilities{
+    .h-85{
+        height:85%;
+    }
+}
+
+#root{
+    font-family: 'Gowun Batang', serif;
+}
+
+*{
+    -ms-overflow-style: none;
+}
+::-webkit-scrollbar {
+    display: none;
+}
+
