@@ -1,0 +1,4 @@
+export const RECORD_USER_MSG="RECORD_USER_MSG";
+export const SEND_AND_RECEIVE="SEND_AND_RECEIVE";
+
+
