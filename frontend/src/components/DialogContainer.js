@@ -1,41 +1,20 @@
 import { useState, useEffect, useRef } from 'react';
 import { MailIcon } from '@heroicons/react/solid'
 import MessageObj from './MessageObj';
-import axios from 'axios';
-
-const testData = [{
-    title: '여성장애인 출산 및 양육 지원',
-    desc: '- 출산지원금 : 여성장애인의 출산비용 지원을 통해 경제적 부담 경감 및 출산친화 문화 조성 - 양육지원금 : 여성장애인에게 양육비 지원을 통해 여성장애인의 안정적인 가족생활 영위 및 출산장려'
-},
-{
-    title: '저소득층 국민건강보험료 지원',
-    desc: '생활에 어려움을 겪고 있는 저소득 주민에게 국민건강보험료 및 노인장기요양보험료를 지원함으로써 시민의 건강증진과 사회복지 향상을 도모하고 의료사각지대 해소'
-},
-{
-    title: '불우소외계층지원',
-    desc: '어려운 이웃과 따뜻한 정을 나누는 사회분위기 조성'
-},
-{
-    title: '장애인 의료재활지원',
-    desc: '저소득 장루 요루 장애인에 대한 의료케어제품 구입비 지원'
-},
-{
-    title: '노인대학운영',
-    desc: '노인 여가활동 지원'
-}]
+import {useSelector,useDispatch} from 'react-redux';
+import { sendAndReceive,recordUserMsg } from '../store/_actions/DialogAction';
 
 function DialogContainer() {
-    const [dialog, setDialog] = useState([{ type: 'bot', message: '안녕하세요? 맞춤형 복지정보 탐색 챗봇입니다 ^^\n어떤 복지정보를 찾으시는지 알려주세요', data: [] }]);
-    const [botMessage, setBotMessage] = useState([]);
-    const [userMessage, setUserMessage] = useState([]);
     const inputRef = useRef(null);
-    const messagesEndRef = useRef(null)
+    const messagesEndRef = useRef(null);
+    const dispatch=useDispatch();
+    const dialog=useSelector(state=>state.dialog);
 
     window.onbeforeunload = function () {
         window.scrollTo(0, 0);
     }
 
-    const scrollToBottom = () => {
+    const scrollToBottom = () => { 
         //scollIntoView 사용 시 상단 overflow문제가 발생해서 
         messagesEndRef.current.parentNode.scrollTop=messagesEndRef.current.offsetTop;
         
@@ -48,29 +27,19 @@ function DialogContainer() {
 
     }, [dialog]);
 
-
-    const sendMessage = (e) => {
+    const sendMessage=(e)=>{
         e.preventDefault();
-
+        
         if (!inputRef.current.value) return;
 
-        setDialog([...dialog, { type: 'user', message: inputRef.current.value, data: [] }]);
+        //유저 메시지 등록 액션 호출
+        dispatch(recordUserMsg(inputRef.current.value));
 
-        axios.post('http://localhost:8000/api/chat', {
-            message: inputRef.current.value
-        }).then(res => {
-            console.log(res);
-            let check = res.data.isLast;
-            let welfare = [];
-            if (check === true) {
-                
-                welfare = testData;
-            }
-            setDialog(elements => [...elements, { type: 'bot', message: res.data.message, data: [] }, { type: 'data', message: '', data: welfare }]);
+        //메시지 전송 및 봇 응답 수신 액션 호출
+        sendAndReceive(inputRef.current.value).then(res=>dispatch(res));
 
-        })
-
-        inputRef.current.value = '';
+        inputRef.current.value=''
+            
     }
 
     return (
