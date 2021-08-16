@@ -4,20 +4,33 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Gowun+Batang&display=swap');
 
-@layer utilities{
-    .h-85{
-        height:85%;
-    }
-}
-
 #root{
     font-family: 'Gowun Batang', serif;
 }
 
 *{
     -ms-overflow-style: none;
+    scroll-behavior:smooth;
 }
 ::-webkit-scrollbar {
     display: none;
 }
 
+/* 모바일 뷰 */
+body > #root >.App{
+    height:100vh;
+    height: -webkit-fill-available;
+    overflow:hidden;
+}
+
+/* 일반적인 뷰 */
+@Media screen and (min-width:640px){
+    body > #root >.App{
+        height:100vh;
+        overflow:hidden;
+    }
+}
+
+html {
+    height: -webkit-fill-available;
+ }
