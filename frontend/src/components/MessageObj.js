@@ -1,12 +1,16 @@
-import WelfareCard from "./WelfareCard";
+import {useRef} from 'react'
 import Carousel from 'nuka-carousel';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
+import { resetDialog } from "../store/_actions/DialogAction";
+import {useDispatch} from 'react-redux';
+import botImg from '../images/bot2.png';
 
 function MessageObj({type, msg, data}) {
+    const dispatch=useDispatch();
 
     let justify='';
     if (type==='bot' || type==='data'){
-        justify='flex justify-start mx-3  md:mx-4 md:w-5/12 w-4/5';
+        justify='flex justify-start mx-3  md:mx-4 md:w-5/12 w-3/5';
     }
     else{
         justify='flex mx-2 md:mx-4 justify-end';
@@ -14,10 +18,10 @@ function MessageObj({type, msg, data}) {
 
     return (
         <div className={justify}>
-            {type==='bot' && (<div className='flex items-center md:mb-8 mb-4'>
+            {type==='bot' && (<div className='flex items-center mb-8'>
                 {/* 봇 이미지 */}
                 <div className='flex-shrink-0'>
-                    <img src='/images/bot2.png' className='md:w-12 md:h-12 w-8 h-8' />    
+                    <img src={botImg} className='md:w-12 md:h-12 w-8 h-8' />    
                 </div>
 
                 {/* 봇 메시지 */} 
@@ -28,7 +32,7 @@ function MessageObj({type, msg, data}) {
             
             </div>)}
         
-            {type==='user' && (<div className='flex justify-end items-center md:mb-8 mb-4 md:w-5/12'>
+            {type==='user' && (<div className='flex justify-end items-center mb-8 md:w-5/12'>
                 {/*사용자 메시지 */}
                 <div className=' flex bg-blue-400 rounded-xl ml-2 p-4 text-white shadow-md'>
                     <p>{msg}</p>
@@ -36,11 +40,12 @@ function MessageObj({type, msg, data}) {
             </div>)}
             
             {data.length>0 && (
-                <Carousel className='w-full px-4 py-4 md:px-7 md:ml-2 md:py-8 bg-blue-50 hover:scale-105 rounded-xl 
-                hover:bg-blue-100 transform duration-500 shadow-lg md:mb-10' wrapAround={true}
+              <div className='flex-col w-full items-center'>
+                <Carousel className='flex px-4 py-4 md:px-7 ml-2 md:py-8 bg-blue-50 hover:scale-105 rounded-xl 
+                hover:bg-blue-100 transform duration-500 shadow-lg mb-4 outline-none' wrapAround={true}
                 defaultControlsConfig={{
                     pagingDotsStyle: {
-                      fill: "green",
+                      fill: "purple",
                       margin:'3px'
                     }
                   }}
@@ -53,10 +58,18 @@ function MessageObj({type, msg, data}) {
                     {data.map(d=>(
                          <div className='flex-col items-center justify-center' key={d.title}>
                              <p className='text-blue-700 text-sm md:text-lg md:mb-4 mb-2'>{d.title}</p>
-                             <p className='md:text-sm md:pb-0 pb-2'>{d.desc}</p>
+                             <p className='md:text-sm md:pb-0 pb-2'>{d.description}</p>
                          </div>
                     ))}
                 </Carousel>
+                <button 
+                    className=' bg-blue-400 text-white text-sm p-2 rounded-full
+                    animate-pulse float-right md:ml-2 mb-8'
+                    onClick={()=>{
+                        dispatch(resetDialog());
+                    }}
+                >다시 대화하기</button>
+                </div> 
             )}
         </div>
     )

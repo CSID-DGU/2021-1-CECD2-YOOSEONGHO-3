@@ -6,7 +6,7 @@ function App() {
   const [welfares, setWelfares] = useState([]);
 
   return (
-    <div className="App" style={{height:'100vh',overflowY:'hidden'}}>
+    <div className="App">
       <Navbar />
       <DialogContainer />
     </div>
