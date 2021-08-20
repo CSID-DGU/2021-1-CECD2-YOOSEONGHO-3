@@ -18,7 +18,6 @@
 
 /* 모바일 뷰 */
 body > #root >.App{
-    height:100vh;
     height: -webkit-fill-available;
     overflow:hidden;
 }
@@ -30,7 +29,3 @@ body > #root >.App{
         overflow:hidden;
     }
 }
-
-html {
-    height: -webkit-fill-available;
- }

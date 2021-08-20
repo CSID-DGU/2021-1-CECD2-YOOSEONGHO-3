@@ -7,7 +7,6 @@ import { sendAndReceive, recordUserMsg } from '../store/_actions/DialogAction';
 function DialogContainer() {
     const inputRef = useRef(null);
     const messagesEndRef = useRef(null);
-    const scrollBtnRef=useRef(null);
     const dispatch = useDispatch();
     const dialog = useSelector(state => state.dialog);
 
@@ -20,12 +19,11 @@ function DialogContainer() {
         messagesEndRef.current.parentNode.scrollTop = messagesEndRef.current.offsetTop;
 
     }
-    useEffect(() => {
-        if (dialog.length>4){
-            scrollToBottom();
-        }
 
-    }, [dialog]);
+    //scrollToBottom이 잘 먹히게 하기 위해 이런식으로 만들었다
+    const dispatchUserMsg=async(m)=>{
+        dispatch(recordUserMsg(inputRef.current.value));
+     }
 
     const sendMessage = (e) => {
         e.preventDefault();
@@ -33,7 +31,7 @@ function DialogContainer() {
         if (!inputRef.current.value) return;
 
         //유저 메시지 등록 액션 호출
-        dispatch(recordUserMsg(inputRef.current.value));
+        dispatchUserMsg(inputRef.current.value).then(res=>{scrollToBottom();});
 
         //메시지 전송 및 봇 응답 수신 액션 호출
         sendAndReceive(inputRef.current.value).then(res => {
@@ -45,9 +43,9 @@ function DialogContainer() {
     }
 
     return (
-        <div className='flex-col border-l-2 border-r-2 border-gray-300 md:mx-14'>
+        <div className='flex flex-col border-l-2 border-r-2 border-gray-300 md:mx-14'>
             {/* 봇과 사용자의 대화 부분 */}
-            <div className='flex-col h-screen overflow-y-auto md:pt-8 pt-4  pb-32 text-xs md:text-base'
+            <div className='flex flex-col h-screen overflow-y-auto md:pt-8 pt-4  pb-36 text-xs md:text-base'
                 style={{ scrollBehavior: 'smooth' }}>
                 {dialog.map(message => (
                     <div key={Math.random()}>

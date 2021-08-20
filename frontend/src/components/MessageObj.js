@@ -40,7 +40,7 @@ function MessageObj({type, msg, data}) {
             </div>)}
             
             {data.length>0 && (
-              <div className='flex-col w-full items-center'>
+              <div className='flex flex-col w-full items-center'>
                 <Carousel className='flex px-4 py-4 md:px-7 ml-2 md:py-8 bg-blue-50 hover:scale-105 rounded-xl 
                 hover:bg-blue-100 transform duration-500 shadow-lg mb-4 outline-none' wrapAround={true}
                 defaultControlsConfig={{
@@ -56,7 +56,7 @@ function MessageObj({type, msg, data}) {
                     <ChevronRightIcon className='w-8 h-8 opacity-50 hover:text-gray-500 animate-bounce text-gray-400' onClick={nextSlide} />
                 )}>
                     {data.map(d=>(
-                         <div className='flex-col items-center justify-center' key={d.title}>
+                         <div className='flex flex-col items-center justify-center' key={d.title}>
                              <p className='text-blue-700 text-sm md:text-lg md:mb-4 mb-2'>{d.title}</p>
                              <p className='md:text-sm md:pb-0 pb-2'>{d.description}</p>
                          </div>
