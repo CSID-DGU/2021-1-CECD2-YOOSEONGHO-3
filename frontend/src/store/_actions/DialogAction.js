@@ -20,4 +20,18 @@ export const sendAndReceive = async (message) => {
     }
 }
 
+//dialog 초기화
+export const resetDialog=()=>{
+    return {
+        type:'RESET_DIALOG',
+        payload:null
+    };
+}
+
+//챗봇 응답을 가져오기까지 로딩표시를 위한 함수
+export const loading=()=>{
+    return {
+        type:'LOADING'
+    }
+}
 
