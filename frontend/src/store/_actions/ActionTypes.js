@@ -1,4 +1,5 @@
 export const RECORD_USER_MSG="RECORD_USER_MSG";
 export const SEND_AND_RECEIVE="SEND_AND_RECEIVE";
-
+export const RESET_DIALOG="RESET_DIALOG";
+export const LOADING='LOADING';
 
