@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { MailIcon } from '@heroicons/react/solid'
 import MessageObj from './MessageObj';
 import { useSelector, useDispatch } from 'react-redux';
-import { sendAndReceive, recordUserMsg } from '../store/_actions/DialogAction';
+import { sendAndReceive, recordUserMsg, loading } from '../store/_actions/DialogAction';
 
 function DialogContainer() {
     const inputRef = useRef(null);
@@ -21,7 +21,7 @@ function DialogContainer() {
     }
 
     //scrollToBottom이 잘 먹히게 하기 위해 이런식으로 만들었다
-    const dispatchUserMsg=async(m)=>{
+    const dispatchUserMsg=async()=>{
         dispatch(recordUserMsg(inputRef.current.value));
      }
 
@@ -32,6 +32,8 @@ function DialogContainer() {
 
         //유저 메시지 등록 액션 호출
         dispatchUserMsg(inputRef.current.value).then(res=>{scrollToBottom();});
+
+        dispatch(loading())
 
         //메시지 전송 및 봇 응답 수신 액션 호출
         sendAndReceive(inputRef.current.value).then(res => {
