@@ -1,11 +1,11 @@
-import {useRef} from 'react'
 import Carousel from 'nuka-carousel';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/solid'
 import { resetDialog } from "../store/_actions/DialogAction";
 import {useDispatch} from 'react-redux';
 import botImg from '../images/bot2.png';
 
-function MessageObj({type, msg, data}) {
+function MessageObj({type, msg='', data=[]}) {
     const dispatch=useDispatch();
 
     let justify='';
@@ -25,11 +25,12 @@ function MessageObj({type, msg, data}) {
                 </div>
 
                 {/* 봇 메시지 */} 
-                <div className=' flex bg-gray-100 rounded-xl ml-2 p-4 hover:scale-105 
-                transition duration-700 transform ease-in-out shadow-md'>
-                    <p>{msg}</p>
-                </div>    
-            
+                <div className='flex bg-gray-100 rounded-xl ml-2 p-4 hover:scale-105 
+                    transition duration-700 transform ease-in-out shadow-md'>
+                    {msg ? (<p>{msg}</p>) : (
+                        <CircularProgress />
+                    )}
+                </div>
             </div>)}
         
             {type==='user' && (<div className='flex justify-end items-center mb-8 md:w-5/12'>
