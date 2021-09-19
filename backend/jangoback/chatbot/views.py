@@ -33,7 +33,7 @@ def chat(request):
     req = json.loads(request.body)
     message = req['message']
 
-    project_id = os.getenv('DIALOGFLOW_PROJECT_ID')
+    project_id = os.environ['DIALOGFLOW_PROJECT_ID']
     query_result = detect_intent_texts(project_id, "unique", message, 'ko')
 
     if query_result.all_required_params_present and query_result.intent.display_name!="Default Fallback Intent":
