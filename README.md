@@ -3,8 +3,8 @@
 
 ## 1. 프로젝트 주제
 <div>
-<img src="https://user-images.githubusercontent.com/57261470/148236317-b493860b-42ad-4ec9-be15-9a021967192a.png" height="500">
-<img src="https://user-images.githubusercontent.com/57261470/148236329-93fad338-2b21-4645-a55d-e8cbdbc3d9c5.png" height="500">
+<img src="https://user-images.githubusercontent.com/57261470/148236317-b493860b-42ad-4ec9-be15-9a021967192a.png" height="350">
+<img src="https://user-images.githubusercontent.com/57261470/148236329-93fad338-2b21-4645-a55d-e8cbdbc3d9c5.png" height="350">
 </div>   
 
 ### **👨‍👨‍👦‍👦모두의 복지 챗봇**
