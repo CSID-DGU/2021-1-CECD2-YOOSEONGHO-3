@@ -18,3 +18,11 @@
 
 ## 2. 기술스택 & Workflow
 ![image](https://user-images.githubusercontent.com/57261470/148245736-f17645fa-8b46-47c8-9243-4733c5869789.png)
+
+
+## 3. 시연영상
+<div>
+<img src="https://user-images.githubusercontent.com/57261470/148251609-e9e8b84a-bc51-4892-b061-c34610ec3f3b.gif" height="350">
+<img src="https://user-images.githubusercontent.com/57261470/148252921-c0b796ce-9c1e-46eb-9667-c889b00843ec.gif" height="350">
+</div>
+
